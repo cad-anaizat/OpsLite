@@ -38,9 +38,6 @@ packages/
 .kudu/
 .zipdeploy/
 
-# App settings (keep a sample; don’t push secrets)
+# App settings 
 appsettings.Development.json
 appsettings.*.local.json
-# If your real appsettings.json may include secrets, ignore it and add a sample:
-# appsettings.json
-# appsettings.sample.json
