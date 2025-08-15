@@ -1,0 +1,29 @@
+@*
+  Simple layout
+*@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpsLite</title>
+  <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>OpsLite</h1>
+    <nav>
+      <a href="/">Dashboard</a> |
+      <a href="/WorkOrders">Work Orders</a> |
+      <a href="/swagger">API</a>
+    </nav>
+  </header>
+  <main class="container">
+    @RenderBody()
+  </main>
+  <footer class="container small">
+    <hr />
+    <p>© @DateTime.UtcNow.Year OpsLite</p>
+  </footer>
+</body>
+</html>

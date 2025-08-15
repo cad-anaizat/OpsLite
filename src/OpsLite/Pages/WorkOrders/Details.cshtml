@@ -1,0 +1,47 @@
+@page
+@model OpsLite.Pages.WorkOrders.DetailsModel
+@using OpsLite.Models
+
+<h2>Work Order @Model.Item?.Id</h2>
+@if (Model.Item is not null)
+{
+  <p><strong>Title:</strong> @Model.Item.Title</p>
+  <p><strong>Description:</strong> @Model.Item.Description</p>
+  <p><strong>Priority:</strong> @Model.Item.Priority</p>
+  <p><strong>Status:</strong> <span class="badge @Model.Item.Status">@Model.Item.Status</span></p>
+  <p><strong>Requester:</strong> @Model.Item.Requester</p>
+  <p><strong>Assignee:</strong> @Model.Item.Assignee</p>
+  <p><strong>Created:</strong> @Model.Item.CreatedAtUtc.ToString("u")</p>
+
+  <h3>Notes</h3>
+  <ul>
+  @foreach (var n in Model.Item.Notes.OrderByDescending(x => x.CreatedAtUtc))
+  {
+    <li><strong>@n.Author</strong> (@n.CreatedAtUtc:u): @n.Body</li>
+  }
+  </ul>
+
+  <form method="post">
+    <h4>Add Note</h4>
+    <div class="row">
+      <label>Author</label>
+      <input type="text" asp-for="Author" />
+    </div>
+    <div class="row">
+      <label>Body</label>
+      <textarea asp-for="Body"></textarea>
+    </div>
+    <div class="actions">
+      <button type="submit">Add Note</button>
+      <a class="button" href="/WorkOrders">Back</a>
+    </div>
+  </form>
+
+  <h3>History</h3>
+  <ul>
+  @foreach (var e in Model.Item.Events.OrderByDescending(x => x.CreatedAtUtc))
+  {
+    <li>@e.CreatedAtUtc:u — @e.Type (@e.Data)</li>
+  }
+  </ul>
+}

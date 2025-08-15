@@ -1,0 +1,21 @@
+@page
+@using OpsLite.Data
+@using OpsLite.Models
+@inject AppDbContext Db
+
+<h2>Dashboard</h2>
+@{
+    var counts = Db.WorkOrders
+        .GroupBy(w => w.Status)
+        .Select(g => new { Status = g.Key, Count = g.Count() })
+        .ToList()
+        .ToDictionary(x => x.Status, x => x.Count);
+    int GetCount(WorkOrderStatus s) => counts.ContainsKey(s) ? counts[s] : 0;
+}
+<div class="cards">
+  <p><span class="badge Open">Open</span> @GetCount(WorkOrderStatus.Open)</p>
+  <p><span class="badge InProgress">In-Progress</span> @GetCount(WorkOrderStatus.InProgress)</p>
+  <p><span class="badge Resolved">Resolved</span> @GetCount(WorkOrderStatus.Resolved)</p>
+  <p><span class="badge Closed">Closed</span> @GetCount(WorkOrderStatus.Closed)</p>
+</div>
+<p><a class="button" href="/WorkOrders/Create">+ New Work Order</a></p>

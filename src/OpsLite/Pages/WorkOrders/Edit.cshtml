@@ -1,0 +1,42 @@
+@page
+@model OpsLite.Pages.WorkOrders.EditModel
+@using OpsLite.Models
+<h2>Edit Work Order</h2>
+
+<form method="post">
+  <input type="hidden" asp-for="Id" />
+  <div class="row">
+    <label>Title</label>
+    <input type="text" asp-for="Input.Title" required />
+  </div>
+  <div class="row">
+    <label>Description</label>
+    <textarea asp-for="Input.Description"></textarea>
+  </div>
+  <div class="row">
+    <label>Priority</label>
+    <select asp-for="Input.Priority">
+      @foreach (var p in Enum.GetValues(typeof(WorkOrderPriority)))
+      {
+        <option value="@p">@p</option>
+      }
+    </select>
+  </div>
+  <div class="row">
+    <label>Status</label>
+    <select asp-for="Status">
+      @foreach (var s in Enum.GetValues(typeof(WorkOrderStatus)))
+      {
+        <option value="@s">@s</option>
+      }
+    </select>
+  </div>
+  <div class="row">
+    <label>Assignee</label>
+    <input type="text" asp-for="Input.Assignee" />
+  </div>
+  <div class="actions">
+    <button type="submit">Save</button>
+    <a href="/WorkOrders" class="button">Cancel</a>
+  </div>
+</form>

@@ -1,0 +1,56 @@
+@page
+@model OpsLite.Pages.WorkOrders.IndexModel
+@using OpsLite.Models
+<h2>Work Orders</h2>
+
+<form method="get">
+  <div class="row">
+    <label>Status</label>
+    <select name="status" asp-for="Status">
+      <option value="">(any)</option>
+      @foreach (var s in Enum.GetNames(typeof(WorkOrderStatus)))
+      {
+        <option selected="@(Model.Status == s ? "selected" : null)">@s</option>
+      }
+    </select>
+  </div>
+  <div class="row">
+    <label>Assignee</label>
+    <input type="text" name="assignee" value="@Model.Assignee" />
+  </div>
+  <div class="actions">
+    <button type="submit">Filter</button>
+    <a href="/WorkOrders" class="button">Reset</a>
+    <a href="/WorkOrders/Create" class="button">+ Create</a>
+  </div>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Assignee</th>
+      <th>Created</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach (var w in Model.Items)
+  {
+    <tr>
+      <td>@w.Id</td>
+      <td><a href="/WorkOrders/Details?id=@w.Id">@w.Title</a></td>
+      <td>@w.Priority</td>
+      <td><span class="badge @w.Status">@w.Status</span></td>
+      <td>@w.Assignee</td>
+      <td>@w.CreatedAtUtc.ToString("u")</td>
+      <td class="actions">
+        <a class="button" href="/WorkOrders/Edit?id=@w.Id">Edit</a>
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>

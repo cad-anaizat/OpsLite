@@ -1,0 +1,44 @@
+@page
+@model OpsLite.Pages.WorkOrders.CreateModel
+@using OpsLite.Models
+<h2>Create Work Order</h2>
+
+<form method="post">
+  <div class="row">
+    <label>Title</label>
+    <input type="text" asp-for="Input.Title" required />
+  </div>
+  <div class="row">
+    <label>Description</label>
+    <textarea asp-for="Input.Description"></textarea>
+  </div>
+  <div class="row">
+    <label>Priority</label>
+    <select asp-for="Input.Priority">
+      @foreach (var p in Enum.GetValues(typeof(WorkOrderPriority)))
+      {
+        <option value="@p">@p</option>
+      }
+    </select>
+  </div>
+  <div class="row">
+    <label>Category</label>
+    <input type="text" asp-for="Input.Category" value="General" />
+  </div>
+  <div class="row">
+    <label>Requester</label>
+    <input type="text" asp-for="Input.Requester" value="anaizat" />
+  </div>
+  <div class="row">
+    <label>Assignee</label>
+    <input type="text" asp-for="Input.Assignee" />
+  </div>
+  <div class="row">
+    <label>Due Date (UTC)</label>
+    <input type="datetime-local" asp-for="Input.DueDateUtc" />
+  </div>
+  <div class="actions">
+    <button type="submit">Create</button>
+    <a href="/WorkOrders" class="button">Cancel</a>
+  </div>
+</form>

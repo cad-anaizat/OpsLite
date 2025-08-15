@@ -1,0 +1,46 @@
+# Build output
+bin/
+obj/
+out/
+artifacts/
+.publish/
+publish/
+
+# VS / Rider / VS Code
+.vs/
+*.user
+*.suo
+*.userprefs
+.idea/
+*.rsuser
+*.sln.iml
+.vscode/
+
+# Logs / temp
+*.log
+logs/
+TestResult*/
+*.coverage
+*.coveragexml
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Azure deployment artifacts
+.scminfo
+.scm/
+.kudu/
+.zipdeploy/
+
+# App settings (keep a sample; don’t push secrets)
+appsettings.Development.json
+appsettings.*.local.json
+# If your real appsettings.json may include secrets, ignore it and add a sample:
+# appsettings.json
+# appsettings.sample.json
